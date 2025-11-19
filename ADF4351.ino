@@ -1,79 +1,5 @@
 //   ADF4251 and Arduino
 //   By Alain Fort F1CJN feb 2,2016
-//   update march 7, 2016 (ROBOT V1.1 and V1.0)
-//
-//
-//  ****************************************************** FRANCAIS ****************************************************
-//   Ce programme utilise un Arduino Uno muni d'un "LCD button shield" de marque ROBOT, avec boutons permettant de commander
-//   un ADF4351 qui generer une frequence comprise entre 34,5 et 4400MHz.
-//   Vingt fréquences peuvent être memorisees dans le memoire EEPROM de l'Arduino.
-//   Si une ou plusieurs fréquence sont mémorisées, alors la fréquence en memoire zero sera affichee à la mise sous tension
-//   
-//   Le curseur se deplace avec les touches LEFT and RIGHT. Les digits placés sous le curseur peuvent être modifiées avec
-//   les touches UP et DOWN, ceci pour la fréquence, la memoire et la frequence de reference:
-//   - pour la fréquence, il suffit de placer le curseur sur le chiffre à modifier,
-//   - pour la mémoire , il suffit de placer le curseur sur le numero de memoire,
-//   - pour la fréqence de référence, il suffit de placer le curseur sur 10 ou 25,
-//   - pour la lecture ou écriture de la frequence en memoire, placer le curseur en bas à gauche (passage de REE(lecture
-//    EEPROM) à WEE(Ecriture EEPROM).
-//    Le curseur disparait apres quelques secondes et est re active lors de l'appui sur une touche.
-//
-//   MEMORISATION 
-//   - pour la frequennce, mettre à WEE, puis selectionner le numero de memoire, puis appuyer sur la touche SELECT pendant 
-//    une seconde. Le mot MEMORISATION apparait alors sur l'ecran. Ceci fonctionne quelquesoit le placement du curseur excepte sur 
-//    l'emplacement de la fréquence de réference 10 ou 25.
-//   - Pour la frequence de reference, placer le curseur sur 10 ou 25, puis appuyer pendant 1s sur la touche SELECT.
-//
-//  ********************************************* HARDWARE IMPORTANT *******************************************************
-//  Avec un Arduino UN0 : utilise un pont de résistances pour réduire la tension, MOSI (pin 11) vers
-//  ADF DATA, SCK (pin13) vers CLK ADF, Select (PIN 3) vers LE
-//  Resistances de 560 Ohm avec 1000 Ohm à la masse sur les pins 11, 13 et 3 de l'Arduino UNO pour
-//  que les signaux envoyés DATA, CLK et LE vers l'ADF4351 ne depassent pas 3,3 Volt.
-//  Pin 2 de l'Arduino (pour la detection de lock) connectee directement à la sortie MUXOUT de la carte ADF4351
-//  La carte ADF est alimentée en 5V par la carte Arduino (les pins +5V et GND sont proches de la LED Arduino).
-//  ***********************************************************************************************************************
-//  Attention : si vous utiliser un afficheur ROBOT Version 1.1 il faut modifier la routine de lecture des boutons
-//  en enlevant les commantaires de la version 1.1 et en mettant en commentaires la version 1.0
-//
-//  *************************************************** ENGLISH ***********************************************************
-//
-//  This sketch uses and Arduino Uno (5€), a standard "LCD buttons shield" from ROBOT (5€), with buttons and an ADF4351 chineese
-//  card found at EBAY (40€). The frequency can be programmed between 34.5 and 4400 MHz.
-//  Twenty frequencies can be memorized into the Arduino EEPROM.
-//  If one or more frequencies are memorized, then at power on, the memory zero is always selected.
-//
-//   The cursor can move with le LEFT and RIGHT buttons. Then the underlined digit can be modified with the UP and DOWN buttons, 
-//    for the frequency, the memories and the frequency reference (10 or 25 MHz):
-//   - to change the frequency, move the cursor to the digit to be modified, then use the UP and DOWN buttons,
-//   - to modify the memory number,move the cursor to the number to be modified, then use the UP and DOWN buttons,
-//   - to select the refrence frequence,move the cursor on 10 or 25 and select with UP and DOWN.
-//   - to read or write the frequency in memory, place the cursor on the more left/more down position and select REE (for Reading EEprom)
-//    or WEE (for Writing EEprom).
-//    The cursor dissapears after few seconds and is re activated if a button is pressed.
-//
-//   MEMORIZATION 
-//    - For the frequency, select WEE, then select the memory number, then push the SELECT button for a second. The word MEMORISATION 
-//    appears on the screen. This memorization works then the cursor is anywhere except on the reference 10 or 25 position.
-//    - For the reference frequency, move the cursor to 10 or 25, the press the SELECT for one second. 
-
-//  ******************************************** HARDWARE IMPORTANT********************************************************
-//  With an Arduino UN0 : uses a resistive divider to reduce the voltage, MOSI (pin 11) to
-//  ADF DATA, SCK (pin13) to ADF CLK, Select (PIN 3) to ADF LE
-//  Resistive divider 560 Ohm with 1000 Ohm to ground on Arduino pins 11, 13 et 3 to adapt from 5V
-//  to 3.3V the digital signals DATA, CLK and LE send by the Arduino.
-//  Arduino pin 2 (for lock detection) directly connected to ADF4351 card MUXOUT.
-//  The ADF card is 5V powered by the ARDUINO (PINs +5V and GND are closed to the Arduino LED).
-
-//************************************************* MANUEL*****************************************************************
-//Touche LEFT    curseur à gauche, cursor to the left
-//Touche RIGHT   curseur à droite, cursor to the right
-//Touche UP      incremente frequence ou memoire, increase frequency
-//Touche DOWN    decremente frequence ou memoire, decrease frequency
-//Touche SELECT  long push = frequency memorization into the EE number EEPROM / or reference memorization
-//*************************************************************************************************************************
-// Warning : if you are using a ROBOT Shied version 1.1, it is necessary to modify the read_lcd_buttons sub routine 
-// you need not to
-แcomment the 1.1 version and to comment the 1.0 version. See below
 
 #include <LiquidCrystal.h>
 #include <EEPROM.h>
@@ -450,3 +376,4 @@ void loop()
    if (timer>1000){lcd.noBlink();timer=0;} // curseur off
 
 }   // fin loop
+
